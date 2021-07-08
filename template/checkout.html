@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} CheckOut {% endblock %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+    <div class="col-md-8 mt-5 p-5">
+        <h3>Items in the Cart</h3>
+        <div class="table-responsive">
+            <table class="table table-responsive table-hover align-middle">
+                <thead class="align-top">
+                    <tr> 
+                        <th>SN</th>
+                        <th>Product Image</th>
+                        <th>Product ID</th>
+                        <th>Product</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <td><img src="{{cp.product.image.url}} " height="100px" width="100px"> </td>
+                        <td>P_id:{{cp.product.id}}</td>
+                        <td> {{cp.product.title}} </td>
+                        <td>Rs.{{cp.rate}} </td>
+                        <td>{{cp.quantity}} {{cp.product.quantity_unit}} </td>
+                        <td>Rs.{{cp.subtotal}} </td>
+                       
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="6" class="text-end " >Total</th>
+                        <th>Rs. {{cart.total}} </th>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a href="{% url 'fresh:mycart' %} " class="btn btn-success float-end">Update</a>
+    </div>
+    <div class="col-md-4 mt-5 p-5">
+        <h3>Order Details</h3>
+        <form action="" class="" method="POST">
+            {% csrf_token %} 
+            {{form.as_p}}
+            <!-- Button trigger modal -->
+            <button type="submit" class="btn btn-info float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Place Order
+            </button>
+  
+            <!-- Modal -->
+        </form>
+        
+    </div>
+</div>
+</div>
+
+{% endblock %}

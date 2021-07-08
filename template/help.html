@@ -1,0 +1,190 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% load markdown_extras %}
+{% block title %} Help Center {% endblock %} 
+
+{% block content %} 
+<div class="container-fluid">
+    <div class="row py-5">
+        
+        <div class="col-md-10 shadow mx-auto shadow my-5 py-5 border-top border-bottom border-5 border-warning position-relative">
+            <span style="font-size:12px;" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-secondary text-white ">
+                <i class="fas fa-info-circle fa-3x text-warning"></i>
+            </span>
+            <h2 class="text-center  text-warning">Help Center</h2>
+            <hr class="bg-warning mb-5 col-md-6 mx-auto">
+            {% for video in help %}
+            <div class="col-md-8 mx-auto">
+                <h4 >How to make the most of the website?</h4><hr>
+                <video class="video-fluid w-100 h-100 mx-auto my-5" controls >
+                <source class=""  src="static/web_help.mp4" type="video/mp4" >
+                </video>
+            </div>
+            {% endfor %}
+            {% for help in yhelp %}
+            <div class="col-md-10 mx-auto">
+                <h4 >{{help.desc}} </h4><hr>
+                {{help.video_link|markdown|safe}}
+            </div>
+            {% endfor %}
+            <div class="col-md-10 mx-auto">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <small><strong> Note:</strong> You can find the answers of following questions in the above video .</small>
+                        <br><br>
+                        <h4 class="text-center">FAQ</h4>
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          #1 How to create account/sign up?
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol>
+                                <li>Click the <a class="btn btn-outline-primary">Sign Up</a> button</li>
+                                <li>Fill the details popped up on the screen.</li>
+                                <li>Click the <a class="btn btn-primary">Register as a Customer</a> button again.</li>
+                            </ol>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          #2 How to buy product?
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol>
+                                <li>Go to home page and click <a class="btn btn-outline-primary  " >Sign up</a>  to create the account.</li>             
+                                <li>Click the <a class="btn btn-outline-success " >Login </a> to login into the account and fill the username and password you have just created.</li>
+                                <li>You see the product in the home page. Click  all the cart <i class="fas fa-cart-plus fa-2x text-danger"></i> of the products you want to buy to add to the cart.</li>
+                                <li>Click the cart icon <i class="fas fa-cart-plus fa-2x position-relative  text-success" ></i> near the search bar icon <i class="fas fa-search fa-2x " style="color: rgb(223, 223, 16);"></i> to see all the products added to the Cart.</li>
+                                <li>There are <a  class="btn btn-success">+</a> , <a  class="btn btn-warning">-</a>, and <a  class="btn btn-danger">x</a> buttons to add, minus and delete the product respectively.</li>
+                                <li>Click the <a  class="btn btn-info">Checkout</a> button to purchase the products.</li>
+                                <li>Fill the checkout form with respective details.</li>
+                                <li>Click <a  class="btn btn-success">Place order</a> button to make the order. And your order is placed.</li>
+                            </ol>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            #3 How can I see my purchase history?
+                          </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                              <ol>
+                                  <li>After login, you can see <i class="fas fa-user-circle fa-2x"></i> icon. Click the icon.</li>
+                                  <li>Select <strong>'Purchase'</strong> option from the dropdown box. And you can see your purchase history.</li>
+                                  <li>To see the product details, click the Order ID link.</li>
+                              </ol>
+                          </div>
+                        </div>
+                      </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingfour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
+                          #4 How to check my profile?
+                        </button>
+                      </h2>
+                      <div id="flush-collapsefour" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol>
+                                <li>After login, you can see <i class="fas fa-user-circle fa-2x"></i> icon. Click the icon.</li>
+                                <li>Select <strong>'My Profile'</strong> option from the dropdown box. And you can see your profile.</li>
+                            </ol>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingfive">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefive" aria-expanded="false" aria-controls="flush-collapsefive">
+                            #5 How to update my profile (Full Name, Address, Phone No:)?
+                          </button>
+                        </h2>
+                        <div id="flush-collapsefive" class="accordion-collapse collapse" aria-labelledby="flush-headingfive" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                            <ol>
+                                <li>After login, you can see <i class="fas fa-user-circle fa-2x"></i> icon. Click the icon.</li>
+                                <li>Select <strong>'My Profile'</strong> option from the dropdown box. And you can see your profile.</li>
+                                <li>There is also <strong>'Edit Profile'</strong> to change your Full Name, Address and Phone Number.</li>
+                            </ol>                            
+                        </div>
+                        </div>
+                      </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingsix">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsesix" aria-expanded="false" aria-controls="flush-collapsesix">
+                            #6 How to change my password?
+                          </button>
+                        </h2>
+                        <div id="flush-collapsesix" class="accordion-collapse collapse" aria-labelledby="flush-headingsix" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                            <ol>
+                                <strong>Option 1: If you are not logged in:</strong>
+                                <li>Click <a class="btn btn-outline-success " >Login </a>.You can see <strong>'Reset now'</strong> at the bottom of the login form. Click the link.</li>
+                                <li>A form is popped up. Enter your registered email id.</li>
+                                <li>Password reset form is popped up. And enter the new password twice. And your password will be changed immediately.</li>
+                                <li>Use this password to login.</li>
+                                <br><br>
+                                <strong>Option 2: If you are  logged in:</strong>
+                                <li>After login, you can see <i class="fas fa-user-circle fa-2x"></i> icon. Click the icon.</li>
+                                <li>Select <strong>'Settings'</strong> option from the dropdown box.</li>
+                                <li>You can see <strong>'this form'</strong> link. Click the link.</li>
+                                <li>You can see the form where you have to enter <strong>Old password</strong> ,<strong>New password1</strong>  and <strong>New password2</strong>  to change the password.</li>
+                                <li>Finally, Click <a class="btn btn-info">Change Password</a> to submit the form to change the password. </li>
+
+                            </ol> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingeight">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseeight" aria-expanded="false" aria-controls="flush-collapseeight">
+                            #7 How to change my email?
+                          </button>
+                        </h2>
+                        <div id="flush-collapseeight" class="accordion-collapse collapse" aria-labelledby="flush-headingeight" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">
+                            <ol>
+                                
+                                <li>After login, you can see <i class="fas fa-user-circle fa-2x"></i> icon. Click the icon.</li>
+                                <li>Select <strong>'Settings'</strong> option from the dropdown box.</li>
+                                <li>You can see <strong>'email form'</strong> . Enter your new email id.</li>
+                                <li>Finally, Click <a class="btn btn-info">Update Account</a> to submit the form to change the email. </li>
+
+                            </ol> 
+                          </div>
+                        </div>
+                      </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingseven">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseseven" aria-expanded="false" aria-controls="flush-collapseseven">
+                        #8 How to make online payment?
+                      </button>
+                    </h2>
+                    <div id="flush-collapseseven" class="accordion-collapse collapse" aria-labelledby="flush-headingseven" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                          <li>Before Purchase, select the <strong>'Payment with Account Number'</strong> option.</li>
+                          <li>At the moment we don't have online payment option using our website. But you can see our account number at the <strong>'footer'</strong> of our website.
+                             You can use this account number to make online payment using your bank app.
+                        </li>
+
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</div> 
+
+
+
+{% endblock %}

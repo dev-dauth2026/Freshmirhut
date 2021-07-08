@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block title %} Customer Registration {% endblock %} 
+
+{% block content %} 
+<style>
+    .errorlist{
+        color: red;
+        list-style: none;
+    }
+</style>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-4 mx-auto shadow my-5 py-5 border-top border-bottom border-5 rounded border-success">
+            <h2 class="text-center text-warning">Edit My Profile</h2>
+            <hr class="bg-success col-md-8 mx-auto mb-5" style="height: 3px;">
+            <form action="" method="POST">
+                {% csrf_token %} 
+                {{form.as_p}}
+                <button class="btn btn-success float-end my-3" type="submit">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %} Order Details {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-10  mx-auto shadow">
+            <h2 class="text-center my-5 text-warning">Order Detail</h2>
+            <div class="table-responsive">
+                <table class="table ">
+                <tr>
+                    <th>Order ID</th>
+                    <th>{{ord_obj.id}} </th>
+                </tr>
+                <tr>
+                    <th>Order Status</th>
+                    <th><button class="btn btn-info">{{ord_obj.order_status}}</button> </th>
+                </tr>
+                <tr>
+                    <th>Ordered Date</th>
+                    <th>{{ord_obj.created_at}}{{ord_obj.created_at|timesince}} ago </th>
+                </tr>
+                <tr>
+                    <th>Customer Information</th>
+                    <th>{{ord_obj.ordered_by}} ({{ord_obj.mobile}} ) </th>
+                </tr>
+                <tr>
+                    <th>Shipping Address</th>
+                    <th>{{ord_obj.shipping_address}}{{ord_obj.email}} </th>
+                </tr>
+            </table>
+            </div>
+            
+
+        </div>
+        <div class="col-md-10  mx-auto shadow">
+            <h2 class="text-center my-5 text-warning">Ordered Items</h2>
+            <div class="table-responsive">
+                <table class="table align-top ">
+                <thead class="align-top">
+                    <tr>
+                    <th>SN</th>
+                    <th>Image</th>
+                    <th>Product ID</th>
+                    <th>Item</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in ord_obj.cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <td><img src="{{cp.product.image.url}} " height="100px" width="100px"> </td>
+                        <td>#Product_{{cp.product.id}} </td>
+                        <td><a target="_blank" class="text-decoration-none text-dark" href="# "> {{cp.product.title}}</a> </td>
+                        <td>Rs.{{cp.rate}} </td>
+                        <td>{{cp.quantity}} {{cp.product.quantity_unit}} </td>
+                        <td>Rs.{{cp.subtotal|intcomma}} </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="6" class="text-end">Total</th>
+                        <th>Rs.{{ord_obj.total|intcomma}} </th>
+                    </tr>
+                </tbody>
+
+            </table>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

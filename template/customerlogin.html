@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+
+{% block title %} Customer Login {% endblock %} 
+
+{% block content %} 
+<div class="container">
+
+    <div class="row col-md-4 mx-auto py-5 shadow border-top border-bottom rounded border-5 border-success  my-5" >
+        <h2 class="text-center my-3">Customer Login</h2>
+        <hr class="bg-success col-md-6 mx-auto" style="height: 2px;">
+        <form action="" method="POST">
+            {% csrf_token %} 
+            {% if error %} 
+            
+              <p class="text-danger">{{error}} </p>
+            {% endif %}
+            {{form.as_p}} 
+            <button class="btn btn-success float-end" type="submit">Customer Login</button>
+        </form>
+        <p>Forgot Password?
+            <a href="{% url 'fresh:passworforgot' %}">Reset now.</a>
+        </p>
+
+        <p class="my-3">Don't have an account?
+            <a href="{% url 'fresh:customerregistration' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Sign Up here</a>
+        </p> 
+    </div>
+    
+</div>
+{% endblock %}

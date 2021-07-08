@@ -1,0 +1,105 @@
+{% extends 'adminpages/adminbase.html' %}
+{% load humanize %}
+
+{% block title %} Order Details {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-10 col-sm-12 col-lg-10 p-5 shadow-lg mx-auto mb-5 border-top  rounded-3 border-5 border-warning">
+            <h1 class="text-center text-warning ">Order Details</h1>
+            <hr class="mb-3 col-md-6 col-sm-12 col-lg-6 mx-auto bg-warning">
+            <table class="table  table-borderless mx-auto ">
+                <tr>
+                    <th>Order ID</th>
+                    <td>#ORDER_{{ord_obj.id}} </td>
+                </tr>
+                <tr>
+                    <th>Order Status</th>
+                    <td>{{ord_obj.order_status}} </td>
+                </tr>
+                <tr>
+                    <th>Ordered Date</th>
+                    <td>{{ord_obj.created_at}} ({{ord_obj.created_at|timesince}} ago) </td>
+                </tr>
+                <tr>
+                    <th>Customer Name</th>
+                    <td>{{ord_obj.ordered_by}}  </td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>{{ord_obj.mobile}} </td>
+                </tr>
+                <tr>
+                    <th>Shipping Address</th>
+                    <td>{{ord_obj.shipping_address}} </td>
+                </tr>
+                <tr>
+                    <th>Email ID</th>
+                    <td>{{ord_obj.email}} </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="col-md-10 col-sm-12 col-lg-10 p-5 mx-auto shadow-lg border-top  rounded-3 border-5 border-warning table-responsive text-white">
+             <h1 class="text-center text-warning ">Ordered Items</h1>
+             <hr class="mb-3 col-md-6 col-sm-12 col-lg-6 mx-auto bg-warning">
+             <div class="table-responsive">
+                 <table class="table   ">
+                <thead class="align-top">
+                    <tr class="text-warning">
+                        <th>SN</th>
+                        <th>Image</th>
+                        <th>Product ID</th>
+                        <th>Item</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    {% for cp in ord_obj.cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <th><a target="_blank"  href="#"><img src="{{cp.product.image.url}}  " height="100px" width="100px"></a> </th>
+                        <td>#P_{{cp.product.id}} </td>
+                        <td>{{cp.product.title}}</td>
+                        <td>Rs.{{cp.rate}} </td>
+                        <td>{{cp.quantity}} {{cp.product.quantity_unit}} </td>
+                        <td>Rs.{{cp.subtotal|intcomma}} </td>
+                    </tr>
+
+
+                    {% endfor %}
+                    <tr class="">
+                        <th colspan="6" style="text-align: center;">Total</th>
+                        <th>Rs.{{ord_obj.total|intcomma}} </th>
+                    </tr>
+                </tbody>
+            </table>
+             </div>
+             <form action="{% url 'fresh:adminorderstatuschange' ord_obj.pk %} " method="POST" class="" >
+                {% csrf_token %}
+                <div class=" col-10 col-md-10 col-lg-10 col-xlg-10  my-3">
+                    <strong class=" text-dark  ">Change Order Status</strong>
+                </div>
+                <div class="input-group mb-3  col-10 col-md-10 col-lg-10 col-xlg-10 mx-auto ">                   
+                    <select name="status" class="form-select" id="status">
+                        {% for i,j in allstatus %}                   
+                        <option class="" value="{{i}} " {% if i == ord_obj.order_status %}selected{% endif %}>{{j}} </option>
+                        {% endfor %}
+                        <input for="status" class="btn btn-info" type="submit" value="Change">        
+                    </select>
+                </div>
+
+            </form>
+            
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

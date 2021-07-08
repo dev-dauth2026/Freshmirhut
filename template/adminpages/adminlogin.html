@@ -1,0 +1,23 @@
+{% extends 'adminpages/adminbase.html' %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-6 col-sm-12 col-lg-6 mx-auto p-5 shadow text-white border-top  rounded-3 border-5 border-danger" style="background-color:  rgb(10, 10, 36)">
+            <h1 class="text-center text-warning">All Orders</h1>
+            <form  action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary " style="float: right;">Login as Admin</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

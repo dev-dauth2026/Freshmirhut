@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}My Cart {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="col-md-10 mx-auto shadow my-5 p-5 border-top border-bottom border-5 border-success position-relative ">
+        <span style="font-size:12px;" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-secondary text-white bg-success">
+            <i class="fas fa-cart-plus fa-3x "></i>
+        </span>
+        <h3 class="text-center text-success">Items In My Cart</h3><hr class="bg-success col-md-6 mx-auto mb-5" style="height: 3px;">
+        <div class="table-responsive">
+            {% if cart %}
+            <table class="table table-responsive table-hover">
+                <thead class="align-top">
+                    <tr> 
+                        <th>SN</th>
+                        <th>Product Image</th>
+                        <th>Product ID</th>
+                        <th>Product</th>
+                        <th>Rate</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <td><img src="{{cp.product.image.url}} " height="100px" width="100px"> </td>
+                        <td>P_id:{{cp.product.id}}</td>
+                        <td> {{cp.product.title}} </td>
+                        <td>Rs.{{cp.rate|intcomma}} </td>
+                        <td>{{cp.quantity}} {{cp.product.quantity_unit}} </td>
+                        <td>Rs.{{cp.subtotal|intcomma}} </td>
+                        <td>
+                            <a href="{% url 'fresh:managecart' cp.id %}?action=inc" class="btn btn-success">+</a>
+                            <a href="{% url 'fresh:managecart' cp.id %}?action=dcr" class="btn btn-warning">-</a>
+                            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">x</a>
+                            
+                  
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Do you want to remove the item from the cart?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        <a href="{% url 'fresh:mycart' %} " class="text-decoration-none text-light">Close</a>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        <a href="{% url 'fresh:managecart' cp.id %}?action=rmv" class="text-decoration-none text-light">Remove</a>
+                                    </button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="6" class="text-end " >Total</th>
+                        <th>Rs. {{cart.total|intcomma}} </th>
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+            {% else %} 
+            <h5 class="text-center"> ☹  There is not product added to the cart.</h5> 
+            {% endif %}
+        </div>
+        <div class="d-flex justify-content-between  col-md-10">
+
+            
+                {% if cart.cartproduct_set.all %}
+                <!-- Button trigger modal -->
+            <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                Delete
+            </a>
+  
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Do you want to delete your cart?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <a href="{% url 'fresh:mycart' %} " class="text-decoration-none text-light">Close</a>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <a href="{% url 'fresh:emptycart' %} " class="text-decoration-none text-light">Delete</a>
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+                {% endif %}
+            
+            
+                {% if cart.cartproduct_set.all %} 
+                <a href="{% url 'fresh:checkout' %}" class="btn btn-info">CheckOut</a>
+                {% endif %}
+            
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}

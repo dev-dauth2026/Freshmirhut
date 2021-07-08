@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+{% load static %}
+{% load humanize %}
+{% block title %} Career {% endblock %} 
+
+{% block content %}
+<div class="container">
+    <div class="row mb-5 pb-5">
+        <div class="col-md-10 mx-auto">
+            <h2 class="text-center">Career</h2><hr>
+            {% if careers %}
+            {% for career in careers %}
+            <summary >
+                <h4>{{career.title}} </h4>
+                <small class="text-muted">{{career.created_at|timesince}} ago </small>
+                <p>Location:{{career.location}} </p>
+                            <details>
+                                <p>{{career.desc|markdown|safe}} </p>
+                            </details>
+                </summary>
+                <hr>
+            {% endfor %}
+            {% else %}
+            <h2 class="text-center">😥😥 Sorry Dear!😥😥 <br> There is no job available at the moment</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

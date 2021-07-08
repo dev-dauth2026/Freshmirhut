@@ -1,0 +1,21 @@
+{% extends 'adminpages/adminbase.html' %}
+
+{% block title %} Add New Product {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-10 col-lg-10 col-sm-12 mx-auto my-5">
+            <h2 class="text-center text-warning my-5">Add New Product</h2>
+            <form action="" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary" style="float: right;">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

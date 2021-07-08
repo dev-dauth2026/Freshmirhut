@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+{% load static %}
+{% block title %} Home {% endblock %} 
+
+{% block content %}
+
+  <div class="container mb-5 mt-0 pt-0">
+    <h1 class="text-center mt-0 pt-0">About Us</h1>
+    <hr>
+    
+   
+    {% for ab in about %}  
+    <div class="d-flex {% if forloop.counter|divisibleby:2 %}flex-md-row-reverse {% else %}flex-md-row {% endif %} flex-sm-column flex-column bd-highlight">
+      <div class="col-md-6  mx-auto my-3 text-center d-flex align-items-center">
+        <div class="">
+          
+        {{ab.about|markdown|safe}}
+        
+        </div>
+        
+      </div>
+      <div class="col-md-6  mx-auto my-3 ">
+              <img class="img-fluid mx-auto d-block rounded-circle z-depth-2 shadow" src="{{ab.about_image.url}} " style="height: 400px; width:400px; float:center; border-style:circle;" alt="" title="image" >
+
+        
+      </div>
+    </div>
+    {% endfor %}
+    {% for location in bcontact %}
+    <section>
+      <div class="col-md-10   mx-auto my-5">
+        <h2 class="text-center ">Location: {{location.address}} </h2><hr><br>
+        {{location.location|markdown|safe}}
+      </div>
+      {% endfor %}
+    </section>
+  </div>
+{% endblock %}

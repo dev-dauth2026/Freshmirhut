@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% block title %} My Profile {% endblock %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row py-5">
+        <div class="col-md-4 shadow mx-auto my-5 py-5 border-top border-bottom border-5 rounded border-warning position-relative">
+            <span style="font-size:12px;" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-secondary text-white ">
+                <i class="fas fa-user fa-3x text-warning"></i>
+            </span>
+            <h2 class="text-center text-warning">My Profile</h2>
+            <div class="table-responsive">
+                <a href="{% url 'fresh:updateprofile' %} " class="btn btn-info float-end">Edit Profile</a>
+                <table class="table align-top">
+                <tr>
+                    <th>Name:</th>
+                    <th>{{customer.full_name}} </th>
+                </tr>
+                <tr>
+                    <th>Username:</th>
+                    <th>{{customer.user.username}} </th>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <th>{{customer.user.email}} </th>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <th>{{customer.mobile}} </th>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <th>{{customer.address}} </th>
+                </tr>
+                <tr>
+                    <th>Joined On:</th>
+                    <th>{{customer.joined_on}} </th>
+                </tr>
+            </table>
+            </div>
+            
+        </div>
+       
+    </div>
+</div>
+
+
+
+{% endblock %}

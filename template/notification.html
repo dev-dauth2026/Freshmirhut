@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% block title %} My Notification {% endblock %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row py-5">
+        
+        <div class="col-md-10 shadow mx-auto shadow my-5 py-5 border-top border-bottom border-5 border-danger position-relative">
+            <span style="font-size:12px;" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-secondary text-white ">
+                <i class="fas fa-bell fa-3x text-danger"></i>
+            </span>
+            <h2 class="text-center  text-danger">My Notification</h2>
+            <hr class="bg-warning mb-5 col-md-6 mx-auto">
+            <div class="table-responsive">
+                <table class="table align-top table-hover">
+                <thead class="align-top">
+                    <thead class="bg-secondary">
+                        <tr>
+                            <th>SN</th>
+                            <th>Date/Time</th>
+                            <th>Messages</th>
+                        </tr>
+                    </thead>
+                    {% for nt in notification %}
+                    <tbody>
+                        <tr>
+                            <td>{{forloop.counter}}  </td>
+                            <td class=""><small>{{nt.created_at}} ({{nt.created_at|timesince}}) ago</small></td>
+                            <td>{{nt.message}}   </td>
+                        
+                        </tr>
+                    </tbody>
+                    
+                   
+                    {% endfor %}
+               
+                
+            </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

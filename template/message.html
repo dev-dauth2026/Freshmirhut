@@ -1,0 +1,54 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% block title %} My Messages {% endblock %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row py-5">
+        
+        <div class="col-md-8 shadow mx-auto  my-5 py-5 border-top border-bottom border-5 rounded border-info position-relative">
+            <span style="font-size:12px;" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-secondary text-white ">
+                <i class="fas fa-envelope fa-3x text-info"></i>
+            </span>
+            <h2 class="text-center text-warning">My Messages</h2>
+            <hr class="bg-warning">
+            <div class="table-responsive">
+                <table class="table align-top table-hover">
+                <thead class="align-top">
+                    <tr>
+                        <th>SN</th>
+                        <th>Ordered On</th>
+                        <th>Messages</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if orders %}
+                    {% for ord in orders %} 
+                    <tr>
+                            <td>{{forloop.counter}} </td>
+                            <td>{{ord.created_at|timesince}} ago </td>
+                            <td>Thank you so much for purchasing .Your <strong> ORDER ID:</strong> <a href="{% url 'fresh:customerorderdetail' ord.pk %}"> #ORDER_{{ord.id}}. 
+                                 </a>Click this order id link to view all the items. Your TOTAL AMOUNT is <strong>
+                                     Rs.{{ord.total|intcomma}}</strong>. 
+                                     Your order status is '{{ord.order_status}}'.Your payment method is '{{ord.payment_method}}'. <br>
+                                     {% if online %} Please make your payment as soon as possible in the account number given in the footer part of website to proceed your order. {% endif %} </td>
+                            
+
+                        </tr>
+
+                    {% endfor %}
+                    {% else %}
+                    <td colspan="5" class="text-center"><h3 class="">No Orders</h3></td>
+                    {% endif %}
+                </tbody>
+            </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

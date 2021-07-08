@@ -1,0 +1,51 @@
+{% extends 'base.html' %} 
+{% load humanize %}
+{% block title %} My Purchase {% endblock %} 
+
+{% block content %} 
+<div class="container">
+    <div class="row py-5">
+        
+        <div class="col-md-8 shadow mx-auto  my-5 py-5 border-top border-bottom border-5 rounded border-success position-relative">
+            <span style="font-size:12px;" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-secondary text-white bg-success ">
+                <i class="fas fa-money-check fa-3x "></i>
+            </span>
+            <h2 class="text-center my-5 text-warning">My Purchase</h2>
+            <div class="table-responsive">
+                <table class="table align-top">
+                <thead class="align-top">
+                    <tr>
+                        <th>SN</th>
+                        <th>Order ID</th>
+                        <th>Amount</th>
+                        <th>Ordered On</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if orders %}
+                    {% for ord in orders %} 
+                    <tr>
+                            <td>{{forloop.counter}} </td>
+                            <td><a href="{% url 'fresh:customerorderdetail' ord.pk %}"> #ORDER_{{ord.id}}</a></td>
+                            <td>Rs.{{ord.total|intcomma}} </td>
+                            <td>{{ord.created_at|timesince}} ago </td>
+                            <td>{{ord.order_status}} </td>
+
+                        </tr>
+
+                    {% endfor %}
+                    {% else %}
+                    <td colspan="5" class="text-center"><h3 class="">No Orders</h3></td>
+                    {% endif %}
+                </tbody>
+            </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

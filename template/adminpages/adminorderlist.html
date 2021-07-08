@@ -1,0 +1,48 @@
+{% extends 'adminpages/adminbase.html' %}
+{% load humanize %}
+
+{% block titlte %} OrderList {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-5">
+        <div class="col-10 mx-auto py-5">
+            <h2 class="text-center my-5 text-warning">All Orders</h2>
+            <div class="table-responsive">
+                <table class="table ">
+                <thead>
+                    <tr class="text-warning">
+                        <th>SN</th>
+                        <!-- <th></th> -->
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Order Date</th>
+                        <th>Amount</th>
+                        <th>Order Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in allorders %}
+                    <tr>
+                        <td>{{forloop.counter}} </td>
+                        <!-- <td><img  src="{{order.product.image.url}}" height="100px" width="100px"> </td> -->
+                        <td><a class="" href="{% url 'fresh:adminorderdetail' order.pk %} "> #ORDER_{{order.id}}</a> </td>
+                        <td>{{order.ordered_by}} </td>
+                        <td>{{order.created_at|timesince}} ago </td>
+                        <td>Rs.{{order.total|intcomma}} </td>
+                        <td>{{order.order_status}} </td>
+                    </tr>
+
+
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

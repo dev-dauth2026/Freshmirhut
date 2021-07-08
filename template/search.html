@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Search {% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row my-5">
+        
+        <div class="col-md-11 mx-auto my-5 ">
+            <h2 class="text-center">Search Result for
+                <span class="text-warning">'{{request.GET.keyword}}' </span>
+            </h2>
+            <hr >
+        </div>
+        {% if results %}
+        {% for result in results %}
+        <div class="col-11 col-sm-11 col-md-5 col-lg-3 col-xlg-3 my-3 mx-auto   ">
+            <div class="card ">
+  
+              <img src="{{result.image.url}} " alt="{{result.title}}" width="100%" height="300px" class="shadow">
+              <strong><p class="mt-3 px-3 font-bold">{{result.title}} </p></strong>
+              <div class=" d-flex justify-content-between px-3">
+                <p class="">Price:<strike class="text-danger">Rs.{{result.marked_price}} </strike> Rs.{{result.selling_price}} </p>
+                <a href="{% url 'fresh:addtocart' result.id %} "  ><i class="fas fa-cart-plus fa-2x text-danger"></i> </a> 
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        {% else %} 
+        <h4 class="text-center"> Sorry!!😢😢 We could not find the item. </h4>
+        {% endif %}
+    </div>
+    
+
+</div>
+
+
+
+{% endblock %}
